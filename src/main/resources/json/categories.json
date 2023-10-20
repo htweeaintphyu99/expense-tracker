@@ -1,0 +1,68 @@
+[
+	{
+		"name": "Food & Drink",
+		"iconName": "restaurant",
+		"iconBgColor": "#612500",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "Shopping",
+		"iconName": "local_mall",
+		"iconBgColor": "#08979C",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "Domiciliary",
+		"iconName": "home",
+		"iconBgColor": "#531DAB",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "Health & Beauty",
+		"iconName": "cardiology",
+		"iconBgColor": "#FA897B",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "Transportation",
+		"iconName": "commute",
+		"iconBgColor": "#D4B106",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "Vehicle",
+		"iconName": "local_gas_station",
+		"iconBgColor": "#434343",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "Leisure",
+		"iconName": "interactive_space",
+		"iconBgColor": "#40A9FF",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "Business",
+		"iconName": "card_travel",
+		"iconBgColor": "#4DD64A",
+		"type": "INCOME"
+	},
+	{
+		"name": "Salary",
+		"iconName": "monetization_on",
+		"iconBgColor": "#FA5E8D",
+		"type": "INCOME"
+	},
+	{
+		"name": "Lottery",
+		"iconName": "money",
+		"iconBgColor": "#FA8C16",
+		"type": "INCOME"
+	},
+	{
+		"name": "Freelance",
+		"iconName": "payments",
+		"iconBgColor": "#FA16C8",
+		"type": "INCOME"
+	}
+]

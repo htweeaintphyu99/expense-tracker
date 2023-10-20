@@ -1,0 +1,157 @@
+[
+	{
+		"name": "lunch_dining",
+		"iconBgColor": "#FF6B6B",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "add_home",
+		"iconBgColor": "#87CEEB",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "price_change",
+		"iconBgColor": "#FFD700",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "sell",
+		"iconBgColor": "#008000",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "liquor",
+		"iconBgColor": "#800080",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "shop",
+		"iconBgColor": "#008080",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "ramen_dining",
+		"iconBgColor": "#E34234",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "local_bar",
+		"iconBgColor": "#4B0082",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "point_of_sale",
+		"iconBgColor": "#FF007F",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "redeem",
+		"iconBgColor": "#FFBF00",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "sports_bar",
+		"iconBgColor": "#191970",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "atm",
+		"iconBgColor": "#708090",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "fastfood",
+		"iconBgColor": "#FF6347",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "add_shopping_cart",
+		"iconBgColor": "#2E8B57",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "shopping_bag",
+		"iconBgColor": "#4169E1",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "account_balance_wallet",
+		"iconBgColor": "#808000",
+		"type": "INCOME"
+	},
+	{
+		"name": "currency_bitcoin",
+		"iconBgColor": "#F7931A",
+		"type": "INCOME"
+	},
+	{
+		"name": "local_convenience_store",
+		"iconBgColor": "#967BB6",
+		"type": "INCOME"
+	},
+	{
+		"name": "savings",
+		"iconBgColor": "#228B22",
+		"type": "INCOME"
+	},
+	{
+		"name": "account_balance",
+		"iconBgColor": "#40E0D0",
+		"type": "INCOME"
+	},
+	{
+		"name": "restaurant",
+		"iconBgColor": "#612500",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "local_mall",
+		"iconBgColor": "#08979C",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "home",
+		"iconBgColor": "#531DAB",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "cardiology",
+		"iconBgColor": "#FA897B",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "commute",
+		"iconBgColor": "#D4B106",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "local_gas_station",
+		"iconBgColor": "#434343",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "interactive_space",
+		"iconBgColor": "#40A9FF",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "card_travel",
+		"iconBgColor": "#4DD64A",
+		"type": "INCOME"
+	},
+	{
+		"name": "monetization_on",
+		"iconBgColor": "#FA5E8D",
+		"type": "INCOME"
+	},
+	{
+		"name": "money",
+		"iconBgColor": "#FA8C16",
+		"type": "INCOME"
+	},
+	{
+		"name": "payments",
+		"iconBgColor": "#FA16C8",
+		"type": "INCOME"
+	}
+]
