@@ -1,4 +1,4 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.nexcode.expensetracker.model.entity.User;
 import com.nexcode.expensetracker.repository.UserRepository;
-import com.nexcode.expensetracker.security.UserPrincipal;
 
 import lombok.RequiredArgsConstructor;
 

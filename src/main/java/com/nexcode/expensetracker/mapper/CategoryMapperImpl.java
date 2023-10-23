@@ -15,6 +15,10 @@ public class CategoryMapperImpl implements CategoryMapper {
 	@Override
 	public CategoryDto mapToDto(CategoryRequest categoryRequest) {
 
+		if(categoryRequest == null) {
+			return null;
+		}
+		
 		CategoryDto categoryDto = new CategoryDto();
 		categoryDto.setName(categoryRequest.getCategoryName());
 		categoryDto.setIconName(categoryRequest.getIconName());
@@ -27,6 +31,10 @@ public class CategoryMapperImpl implements CategoryMapper {
 	@Override
 	public CategoryDto mapToDto(Category category) {
 
+		if(category == null) {
+			return null;
+		}
+		
 		CategoryDto categoryDto = new CategoryDto();
 		categoryDto.setId(category.getId());
 		categoryDto.setName(category.getName());
@@ -40,22 +48,20 @@ public class CategoryMapperImpl implements CategoryMapper {
 	@Override
 	public List<CategoryDto> mapToDto(List<Category> categories) {
 
-		return categories.stream().map(category -> {
-			CategoryDto categoryDto = new CategoryDto();
-			categoryDto.setId(category.getId());
-			categoryDto.setName(category.getName());
-			categoryDto.setIconName(category.getIconName());
-			categoryDto.setIconBgColor(category.getIconBgColor());
-			categoryDto.setType(category.getType());
-
-			return categoryDto;
-		}).collect(Collectors.toList());
-
+		if(categories == null) {
+			return null;
+		}
+ 		
+		return categories.stream().map(c->mapToDto(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<CategoryResponse> mapToRepsonse(List<CategoryDto> categoryDtos) {
 
+		if (categoryDtos == null) {
+			return null;
+		}
+		
 		return categoryDtos.stream().map(categoryDto -> {
 			CategoryResponse categoryResponse = new CategoryResponse();
 			categoryResponse.setId(categoryDto.getId());

@@ -20,6 +20,9 @@ public class FinancialTransactionMapperImpl implements FinancialTransactionMappe
 	@Override
 	public FinancialTransactionDto mapToDto(FinancialTransaction transaction) {
 
+		if(transaction == null) {
+			return null;
+		}
 		FinancialTransactionDto transactionDto = new FinancialTransactionDto();
 		transactionDto.setId(transaction.getId());
 		transactionDto.setCreatedDate(transaction.getCreatedDate());
@@ -33,23 +36,19 @@ public class FinancialTransactionMapperImpl implements FinancialTransactionMappe
 	@Override
 	public List<FinancialTransactionDto> mapToDto(List<FinancialTransaction> transactions) {
 
-		return transactions.stream().map(t -> {
-
-			FinancialTransactionDto transactionDto = new FinancialTransactionDto();
-			transactionDto.setId(t.getId());
-			transactionDto.setAmount(t.getAmount());
-			transactionDto.setCreatedDate(t.getCreatedDate());
-			transactionDto.setDescription(t.getDescription());
-			transactionDto.setUserCategoryDto(userCategoryMapper.mapToDto(t.getUserCategory()));
-			transactionDto.setType(t.getType());
-
-			return transactionDto;
-		}).collect(Collectors.toList());
+		if(transactions == null) {
+			return null;
+		}
+		
+		return transactions.stream().map(t -> mapToDto(t)).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<FinancialTransactionResponse> mapToRepsonse(List<FinancialTransactionDto> transactionDtos) {
 		
+		if(transactionDtos == null) {
+			return null;
+		}
 		return transactionDtos.stream().map(t -> {
 
 			FinancialTransactionResponse transactionResponse = new FinancialTransactionResponse();

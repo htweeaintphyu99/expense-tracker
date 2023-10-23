@@ -1,4 +1,4 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.service.impl;
 
 import java.time.Instant;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nexcode.expensetracker.emailsender.EmailSender;
 import com.nexcode.expensetracker.model.dto.UserDto;
@@ -23,9 +24,12 @@ import com.nexcode.expensetracker.otpgenerator.OtpGenerator;
 import com.nexcode.expensetracker.repository.CategoryRepository;
 import com.nexcode.expensetracker.repository.UserCategoryRepository;
 import com.nexcode.expensetracker.repository.UserRepository;
+import com.nexcode.expensetracker.service.AuthService;
+import com.nexcode.expensetracker.service.RoleService;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -118,7 +122,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public String resendOtp(OtpRequest otpRequest) {
-
+ 
 		User user = userRepository.findByEmail(otpRequest.getEmail())
 				.orElseThrow(() -> new NotFoundException("User not found  with email : " + otpRequest.getEmail()));
 
@@ -126,9 +130,16 @@ public class AuthServiceImpl implements AuthService {
 		user.setOtp(otp);
 		user.setOtpExpirationTime(OtpGenerator.getOtpExpiredTime());
 		userRepository.save(user);
-
+		
+		String emailReceiver = otpRequest.getEmail();
+		
+		if(otpRequest.getNewEmail() != null) {
+		
+			emailReceiver = otpRequest.getNewEmail();
+		}
+		
 		try {
-			emailSender.send(otpRequest.getEmail(),
+			emailSender.send(emailReceiver,
 					EmailSender.buildEmailForm(user.getUsername(), otp));
 		} catch (Exception e) {
 			throw new InternalServerErrorException("Error occured in email sending!");
@@ -152,6 +163,7 @@ public class AuthServiceImpl implements AuthService {
 		userCategoryRepository.saveAll(userCategories);
 	}
 
+	
 	@Override
 	public boolean forgotPassword(String email, String password) {
 

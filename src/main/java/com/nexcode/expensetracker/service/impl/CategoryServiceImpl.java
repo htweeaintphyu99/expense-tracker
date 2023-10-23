@@ -1,17 +1,20 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.service.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nexcode.expensetracker.mapper.CategoryMapper;
 import com.nexcode.expensetracker.model.dto.CategoryDto;
 import com.nexcode.expensetracker.model.entity.Category;
 import com.nexcode.expensetracker.model.exception.NotFoundException;
 import com.nexcode.expensetracker.repository.CategoryRepository;
+import com.nexcode.expensetracker.service.CategoryService;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class CategoryServiceImpl implements CategoryService {

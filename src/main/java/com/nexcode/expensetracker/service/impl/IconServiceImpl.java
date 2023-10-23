@@ -1,17 +1,20 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.service.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nexcode.expensetracker.mapper.IconMapper;
 import com.nexcode.expensetracker.model.dto.IconDto;
 import com.nexcode.expensetracker.model.entity.Icon;
 import com.nexcode.expensetracker.model.exception.NotFoundException;
 import com.nexcode.expensetracker.repository.IconRepository;
+import com.nexcode.expensetracker.service.IconService;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class IconServiceImpl implements IconService{

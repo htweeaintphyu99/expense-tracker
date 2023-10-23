@@ -1,4 +1,4 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,9 +19,11 @@ import com.nexcode.expensetracker.repository.FinancialTransactionRepository;
 import com.nexcode.expensetracker.repository.IconRepository;
 import com.nexcode.expensetracker.repository.UserCategoryRepository;
 import com.nexcode.expensetracker.repository.UserRepository;
+import com.nexcode.expensetracker.service.UserCategoryService;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class UserCategoryServiceImpl implements UserCategoryService {
@@ -94,7 +96,6 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 		return userCategoryDtos;
 	}
 
-	@Transactional
 	@Override
 	public boolean deleteUserCategoryById(Long userCategoryId) {
 

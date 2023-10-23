@@ -1,4 +1,4 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.service.impl;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -19,9 +19,11 @@ import com.nexcode.expensetracker.model.request.FinancialTransactionRequest;
 import com.nexcode.expensetracker.repository.FinancialTransactionRepository;
 import com.nexcode.expensetracker.repository.UserCategoryRepository;
 import com.nexcode.expensetracker.repository.UserRepository;
+import com.nexcode.expensetracker.service.FinancialTransactionService;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class FinancialTransactionServiceImpl implements FinancialTransactionService {
@@ -31,7 +33,6 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 	private final FinancialTransactionRepository transactionRepository;
 	private final FinancialTransactionMapper transactionMapper;
 
-	@Transactional
 	@Override
 	public FinancialTransactionDto createFinancialTransaction(Long userId,
 			FinancialTransactionRequest transactionRequest) {
@@ -61,7 +62,6 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 		return transactionMapper.mapToDto(createdTransaction);
 	}
 
-	@Transactional
 	@Override
 	public FinancialTransactionDto updateFinancialTransaction(Long id, Long userId,
 			FinancialTransactionRequest transactionRequest) {
@@ -103,7 +103,6 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 	}
 
 
-	@Transactional
 	@Override
 	public void deleteFinancialTransactionById(Long id, Long userId) {
 

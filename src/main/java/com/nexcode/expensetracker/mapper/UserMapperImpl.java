@@ -16,6 +16,9 @@ public class UserMapperImpl implements UserMapper{
 	@Override
 	public UserDto mapToDto(User user) {
 		
+		if(user == null) {
+			return null;
+		}
 		UserDto userDto = new UserDto();
 		userDto.setId(user.getId());
 		userDto.setEmail(user.getEmail());
@@ -30,6 +33,9 @@ public class UserMapperImpl implements UserMapper{
 	
 	public UserDto mapToDto(RegisterRequest registerRequest) {
 		
+		if(registerRequest == null) {
+			return null;
+		}
 		UserDto userDto = new UserDto();
 		userDto.setUsername(registerRequest.getUsername());
 		userDto.setEmail(registerRequest.getEmail());
@@ -41,6 +47,9 @@ public class UserMapperImpl implements UserMapper{
 	@Override
 	public UserResponse mapToResponse(UserDto userDto) {
 		
+		if(userDto == null) {
+			return null;
+		}
 		UserResponse userResponse = new UserResponse();
 		userResponse.setId(userDto.getId());
 		userResponse.setEmail(userDto.getEmail());

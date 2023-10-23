@@ -2,6 +2,7 @@ package com.nexcode.expensetracker.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nexcode.expensetracker.emailsender.EmailSender;
 import com.nexcode.expensetracker.mapper.UserMapper;
@@ -18,6 +19,7 @@ import com.nexcode.expensetracker.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
