@@ -32,8 +32,6 @@ public class CategoryServiceImpl implements CategoryService {
 
 		CategoryDto createdCategoryDto = categoryMapper.mapToDto(createdCategory);
 		return createdCategoryDto;
-			
-		
 	}
 
 	@Override

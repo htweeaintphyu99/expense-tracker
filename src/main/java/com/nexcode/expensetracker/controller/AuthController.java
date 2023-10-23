@@ -59,26 +59,25 @@ public class AuthController {
 		}
 		throw new BadRequestException("OTP verification failed. Please check the OTP and try again!");
 	}
-	
 
 	@PostMapping("/login")
 	public JwtAuthenticationResponse login(@Valid @RequestBody LoginRequest loginRequest) {
 
-		try {
-			Date expiredAt = new Date((new Date()).getTime() + 86400 * 1000);
+		Date expiredAt = new Date((new Date()).getTime() + 86400 * 1000);
 
+		String jwtToken = null;
+		try {
 			Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-			String jwtToken = jwtTokenProvider.createJwtToken(authentication);
-
-			return new JwtAuthenticationResponse(jwtToken, expiredAt.toInstant().toString());
-
+			jwtToken = jwtTokenProvider.createJwtToken(authentication);
 		} catch (Exception e) {
 			throw new IncorrectCredentialsException("Email or password incorrect!");
 		}
+
+		return new JwtAuthenticationResponse(jwtToken, expiredAt.toInstant().toString());
 
 	}
 
@@ -88,14 +87,19 @@ public class AuthController {
 		authService.resendOtp(otpRequest);
 		return new ApiResponse(true, "OTP is sent successfully");
 	}
+	
+	@PostMapping("/forgot-password/send-otp")
+	public ApiResponse sendOtpInForgotPassword(@Valid @RequestBody OtpRequest otpRequest) {
 
-	
-	
-	@PostMapping("/forgot-password")
+		authService.resendOtp(otpRequest);
+		return new ApiResponse(true, "OTP is sent successfully");
+	}
+
+	@PostMapping("/forgot-password/reset-passpword")
 	public ApiResponse forgotPassword(@Valid @RequestBody ResetPasswordRequest request) {
-		
+
 		authService.forgotPassword(request.getEmail(), request.getPassword());
-		
+
 		return new ApiResponse(true, "Reset password successfully");
 	}
 

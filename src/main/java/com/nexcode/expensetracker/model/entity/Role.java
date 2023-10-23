@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
 
 	@Id
@@ -29,7 +29,7 @@ public class Role {
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private RoleName name;
 
 	@ManyToMany(mappedBy = "roles")

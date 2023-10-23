@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "user_category")
+@Table(name = "user_categories")
 public class UserCategory {
 	
 	@Id
@@ -28,20 +28,20 @@ public class UserCategory {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private String name;
 
-	@Column(name = "icon_name", nullable = false)
+	@Column(name = "icon_name")
 	private String iconName;
 	
-	@Column(name = "icon_bg_color", nullable = false)
+	@Column(name = "icon_bg_color")
 	private String iconBgColor;
 	
 	@Enumerated(EnumType.STRING)
 	private Type type;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@OneToMany(mappedBy = "userCategory")

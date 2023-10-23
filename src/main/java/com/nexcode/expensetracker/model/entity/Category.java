@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 public class Category {
 
 	@Id
@@ -23,13 +23,13 @@ public class Category {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private String name;
 
-	@Column(name = "icon_name", nullable = false)
+	@Column(name = "icon_name")
 	private String iconName;
 	
-	@Column(name = "icon_bg_color", nullable = false)
+	@Column(name = "icon_bg_color")
 	private String iconBgColor;
 
 	@Enumerated(EnumType.STRING)

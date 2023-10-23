@@ -11,16 +11,16 @@ import com.nexcode.expensetracker.model.request.CategoryRequest;
 import com.nexcode.expensetracker.model.response.CategoryResponse;
 
 @Component
-public class CategoryMapperImpl implements CategoryMapper{
+public class CategoryMapperImpl implements CategoryMapper {
 	@Override
 	public CategoryDto mapToDto(CategoryRequest categoryRequest) {
-		
+
 		CategoryDto categoryDto = new CategoryDto();
 		categoryDto.setName(categoryRequest.getCategoryName());
 		categoryDto.setIconName(categoryRequest.getIconName());
 		categoryDto.setIconBgColor(categoryRequest.getIconBgColor());
 		categoryDto.setType(categoryRequest.getType());
-		
+
 		return categoryDto;
 	}
 
@@ -33,42 +33,39 @@ public class CategoryMapperImpl implements CategoryMapper{
 		categoryDto.setIconName(category.getIconName());
 		categoryDto.setIconBgColor(category.getIconBgColor());
 		categoryDto.setType(category.getType());
-		
+
 		return categoryDto;
 	}
 
 	@Override
 	public List<CategoryDto> mapToDto(List<Category> categories) {
-		
-		return categories.stream()
-				.map(category -> {
-					CategoryDto categoryDto = new CategoryDto();
-					categoryDto.setId(category.getId());
-					categoryDto.setName(category.getName());
-					categoryDto.setIconName(category.getIconName());
-					categoryDto.setIconBgColor(category.getIconBgColor());
-					categoryDto.setType(category.getType());
-					
-					return categoryDto;
-				})
-				.collect(Collectors.toList());
+
+		return categories.stream().map(category -> {
+			CategoryDto categoryDto = new CategoryDto();
+			categoryDto.setId(category.getId());
+			categoryDto.setName(category.getName());
+			categoryDto.setIconName(category.getIconName());
+			categoryDto.setIconBgColor(category.getIconBgColor());
+			categoryDto.setType(category.getType());
+
+			return categoryDto;
+		}).collect(Collectors.toList());
+
 	}
 
 	@Override
 	public List<CategoryResponse> mapToRepsonse(List<CategoryDto> categoryDtos) {
-		
-		return categoryDtos.stream()
-				.map(categoryDto -> {
-					CategoryResponse categoryResponse = new CategoryResponse();
-					categoryResponse.setId(categoryDto.getId());
-					categoryResponse.setIconName(categoryDto.getIconName());
-					categoryResponse.setIconName(categoryDto.getIconName());
-					categoryResponse.setIconBgColor(categoryDto.getIconBgColor()); 
-					categoryResponse.setType(categoryDto.getType());
-					
-					return categoryResponse;
-				})
-				.collect(Collectors.toList());
+
+		return categoryDtos.stream().map(categoryDto -> {
+			CategoryResponse categoryResponse = new CategoryResponse();
+			categoryResponse.setId(categoryDto.getId());
+			categoryResponse.setIconName(categoryDto.getIconName());
+			categoryResponse.setIconName(categoryDto.getIconName());
+			categoryResponse.setIconBgColor(categoryDto.getIconBgColor());
+			categoryResponse.setType(categoryDto.getType());
+
+			return categoryResponse;
+		}).collect(Collectors.toList());
 	}
-	
+
 }

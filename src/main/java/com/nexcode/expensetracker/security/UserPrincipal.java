@@ -34,7 +34,7 @@ public class UserPrincipal implements UserDetails {
 		userPrincipal.setName(user.getUsername());
 		userPrincipal.setEmail(user.getEmail());
 		userPrincipal.setPassword(user.getPassword());
-		userPrincipal.setVerified(user.getVerified());
+		userPrincipal.setVerified(user.isVerified());
 
 		Set<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name()))

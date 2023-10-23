@@ -19,32 +19,32 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "financial_transaction")
+@Table(name = "financial_transactions")
 public class FinancialTransaction {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "created_date", nullable = false)
+	@Column(name = "created_date")
 	private LocalDate createdDate;
 	
-	@Column(name = "amount", nullable = false)
+	@Column(name = "amount")
 	private int amount;
 	
 	@Column(name = "descripton")
 	private String description;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "type", nullable = false)
+	@Column(name = "type")
 	private Type type;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_user_category_id")
+	@JoinColumn(name = "user_category_id")
 	private UserCategory userCategory;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 }

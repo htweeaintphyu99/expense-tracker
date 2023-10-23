@@ -1,17 +1,17 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.emailsender;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@Service
-@AllArgsConstructor
-public class EmailSenderService{
+@RequiredArgsConstructor
+@Component
+public class EmailSender{
 
 
 	private final JavaMailSender mailSender;

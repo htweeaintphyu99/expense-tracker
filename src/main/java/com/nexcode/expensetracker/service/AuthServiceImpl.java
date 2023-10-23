@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nexcode.expensetracker.emailsender.EmailSender;
 import com.nexcode.expensetracker.model.dto.UserDto;
 import com.nexcode.expensetracker.model.entity.Role;
 import com.nexcode.expensetracker.model.entity.RoleName;
@@ -18,6 +19,7 @@ import com.nexcode.expensetracker.model.exception.ConflictException;
 import com.nexcode.expensetracker.model.exception.InternalServerErrorException;
 import com.nexcode.expensetracker.model.exception.NotFoundException;
 import com.nexcode.expensetracker.model.request.OtpRequest;
+import com.nexcode.expensetracker.otpgenerator.OtpGenerator;
 import com.nexcode.expensetracker.repository.CategoryRepository;
 import com.nexcode.expensetracker.repository.UserCategoryRepository;
 import com.nexcode.expensetracker.repository.UserRepository;
@@ -32,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
 	private final UserCategoryRepository userCategoryRepository;
 	private final CategoryRepository categoryRepository;
 	private final PasswordEncoder passwordEncoder;
-	private final EmailSenderService emailSender;
+	private final EmailSender emailSender;
 	private final RoleService roleService;
 
 	@Override
@@ -40,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
 
 		User existingUser = userRepository.findByEmail(userDto.getEmail()).orElse(null);
 
-		if (existingUser != null && existingUser.getVerified()) {
+		if (existingUser != null && existingUser.isVerified()) {
 			throw new ConflictException("This email is already registered!");
 		}
 
@@ -61,7 +63,7 @@ public class AuthServiceImpl implements AuthService {
 
 			try {
 				emailSender.send(existingUser.getEmail(),
-						EmailSenderService.buildEmailForm(existingUser.getUsername(), otp));
+						EmailSender.buildEmailForm(existingUser.getUsername(), otp));
 			} catch (Exception e) {
 				throw new InternalServerErrorException("Error occured in email sending!");
 			}
@@ -76,7 +78,7 @@ public class AuthServiceImpl implements AuthService {
 			userRepository.save(user);
 
 			try {
-				emailSender.send(user.getEmail(), EmailSenderService.buildEmailForm(user.getUsername(), otp));
+				emailSender.send(user.getEmail(), EmailSender.buildEmailForm(user.getUsername(), otp));
 			} catch (Exception e) {
 				throw new InternalServerErrorException("Error occured in email sending!");
 			}
@@ -99,7 +101,7 @@ public class AuthServiceImpl implements AuthService {
 
 			// check if user is already verified or not
 			// if already verified, load default user categories to registered user
-			if (!user.getVerified()) {
+			if (!user.isVerified()) {
 				user.setVerified(true);
 				addDefaultUserCategories(user);
 			}
@@ -127,7 +129,7 @@ public class AuthServiceImpl implements AuthService {
 
 		try {
 			emailSender.send(otpRequest.getEmail(),
-					EmailSenderService.buildEmailForm(user.getUsername(), otp));
+					EmailSender.buildEmailForm(user.getUsername(), otp));
 		} catch (Exception e) {
 			throw new InternalServerErrorException("Error occured in email sending!");
 		}

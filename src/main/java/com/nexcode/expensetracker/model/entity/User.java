@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
 	@Id
@@ -33,14 +33,14 @@ public class User {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "username", nullable = false)
+	@Column(name = "username")
 	private String username;
 
-	@Column(name = "email", nullable = false, unique = true)
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@JsonIgnore
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 
 	@Column(name = "otp")
@@ -62,11 +62,6 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
-
-	@JsonIgnore
-	public boolean getVerified() {
-		return this.verified;
-	}
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	List<UserCategory> userCategories;

@@ -1,9 +1,12 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.otpgenerator;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Random;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class OtpGenerator {
 	
 	public static String generateOtp() {

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "icon")
+@Table(name = "icons")
 public class Icon {
 
 	@Id
@@ -23,10 +23,10 @@ public class Icon {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private String name;
 
-	@Column(name = "icon_bg_color", nullable = false)
+	@Column(name = "icon_bg_color")
 	private String iconBgColor;
 	
 	@Enumerated(EnumType.STRING)

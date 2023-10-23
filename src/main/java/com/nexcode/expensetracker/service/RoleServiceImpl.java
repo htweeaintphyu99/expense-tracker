@@ -7,8 +7,9 @@ import com.nexcode.expensetracker.model.entity.RoleName;
 import com.nexcode.expensetracker.repository.RoleRepository;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class RoleServiceImpl implements RoleService{
 
