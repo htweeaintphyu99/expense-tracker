@@ -81,7 +81,6 @@ public class FinancialTransactionController {
 			@RequestParam(name = "selectedMonth", required = false) String selectedMonth,
 			@RequestParam(name = "filter", required = false) String filter) {
 
-		
 		List<FinancialTransactionDto> transactionDtos = null;
 		
 	    if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) { 
@@ -102,7 +101,6 @@ public class FinancialTransactionController {
 			}
 	    }
 	    
-	    // Parse 'selectMonthStr' to YearMonth
 	    if (selectedMonth != null && !selectedMonth.isEmpty()) {
 			transactionDtos = transactionService.getFinancialTransactionsByMonth(currentUser.getId(), selectedMonth);
 	    }

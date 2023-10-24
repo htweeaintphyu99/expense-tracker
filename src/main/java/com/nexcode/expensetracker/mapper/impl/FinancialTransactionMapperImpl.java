@@ -30,6 +30,7 @@ public class FinancialTransactionMapperImpl implements FinancialTransactionMappe
 		transactionDto.setCreatedDate(transaction.getCreatedDate());
 		transactionDto.setAmount(transaction.getAmount());
 		transactionDto.setDescription(transaction.getDescription());
+		transactionDto.setUserCategoryDto(userCategoryMapper.mapToDto(transaction.getUserCategory()));
 		transactionDto.setType(transaction.getType());
 
 		return transactionDto;
@@ -41,7 +42,6 @@ public class FinancialTransactionMapperImpl implements FinancialTransactionMappe
 		if(transactions == null) {
 			return null;
 		}
-		
 		return transactions.stream().map(t -> mapToDto(t)).collect(Collectors.toList());
 	}
 

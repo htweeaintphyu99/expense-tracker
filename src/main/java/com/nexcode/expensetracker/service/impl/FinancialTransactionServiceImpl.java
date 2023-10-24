@@ -3,8 +3,10 @@ package com.nexcode.expensetracker.service.impl;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,9 +45,11 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 		UserCategory userCategory = userCategoryRepository.findById(transactionRequest.getUserCategoryId())
 				.orElseThrow(() -> new NotFoundException("User category is not found!"));
 
+        LocalDate createdDate = LocalDate.parse(transactionRequest.getCreatedDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
 		FinancialTransaction transaction = new FinancialTransaction();
 		transaction.setAmount(transactionRequest.getAmount());
-		transaction.setCreatedDate(transactionRequest.getCreatedDate());
+		transaction.setCreatedDate(createdDate);
 		transaction.setDescription(transactionRequest.getDescription());
 		transaction.setType(transactionRequest.getType());
 		transaction.setUser(user);
@@ -89,9 +93,11 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 			user.setBalance(user.getBalance() - transaction.getAmount() + transactionRequest.getAmount());
 
 		}
+		
+        LocalDate createdDate = LocalDate.parse(transactionRequest.getCreatedDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 		transaction.setAmount(transactionRequest.getAmount());
-		transaction.setCreatedDate(transactionRequest.getCreatedDate());
+		transaction.setCreatedDate(createdDate);
 		transaction.setDescription(transactionRequest.getDescription());
 		transaction.setType(transactionRequest.getType());
 		transaction.setUserCategory(userCategory);
@@ -144,7 +150,7 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 	public List<FinancialTransactionDto> getFinancialTransactionsByMonth(Long userId, String selectedMonth) {
 
         YearMonth selectedMonthInFormat = YearMonth.parse(selectedMonth, DateTimeFormatter.ofPattern("yyyy-MM"));
-
+        
 		LocalDate startDate = selectedMonthInFormat.atDay(1);
 		LocalDate endDate = selectedMonthInFormat.atEndOfMonth();
 
