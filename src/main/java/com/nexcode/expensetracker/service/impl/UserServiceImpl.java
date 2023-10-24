@@ -1,4 +1,4 @@
-package com.nexcode.expensetracker.service;
+package com.nexcode.expensetracker.service.impl;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,7 @@ import com.nexcode.expensetracker.model.exception.NotFoundException;
 import com.nexcode.expensetracker.model.request.ChangePasswordRequest;
 import com.nexcode.expensetracker.otpgenerator.OtpGenerator;
 import com.nexcode.expensetracker.repository.UserRepository;
+import com.nexcode.expensetracker.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 

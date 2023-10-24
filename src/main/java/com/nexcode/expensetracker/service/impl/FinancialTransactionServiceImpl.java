@@ -2,6 +2,7 @@ package com.nexcode.expensetracker.service.impl;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -125,21 +126,27 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 
 	@Override
 	public List<FinancialTransactionDto> getFinancialTransactionsByFilterAndDateRange(Long userId,
-			LocalDate startDate, LocalDate endDate, Type type) {
+			String startDate, String endDate, Type type) {
+ 
 
+        LocalDate startDateInFormat = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate endDateInFormat = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        
 		Optional<Type> optionalType = Optional.ofNullable(type);
 
 		List<FinancialTransaction> transactions = transactionRepository
-				.findByUserIdAndFilterAndCreatedDateBetween(userId, startDate, endDate, optionalType);
+				.findByUserIdAndFilterAndCreatedDateBetween(userId, startDateInFormat, endDateInFormat, optionalType);
 
 		return transactionMapper.mapToDto(transactions);
 	}
 
 	@Override
-	public List<FinancialTransactionDto> getFinancialTransactionsByMonth(Long userId, YearMonth selectMonth) {
+	public List<FinancialTransactionDto> getFinancialTransactionsByMonth(Long userId, String selectedMonth) {
 
-		LocalDate startDate = selectMonth.atDay(1);
-		LocalDate endDate = selectMonth.atEndOfMonth();
+        YearMonth selectedMonthInFormat = YearMonth.parse(selectedMonth, DateTimeFormatter.ofPattern("yyyy-MM"));
+
+		LocalDate startDate = selectedMonthInFormat.atDay(1);
+		LocalDate endDate = selectedMonthInFormat.atEndOfMonth();
 
 		Optional<Type> optionalType = Optional.ofNullable(Type.EXPENSE);
 

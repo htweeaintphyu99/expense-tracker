@@ -16,8 +16,8 @@ public interface FinancialTransactionService {
 	
 	void deleteFinancialTransactionById(Long id, Long userId);
 
-	List<FinancialTransactionDto> getFinancialTransactionsByFilterAndDateRange(Long userId, LocalDate startDate,
-			LocalDate endDate, Type type);
+	List<FinancialTransactionDto> getFinancialTransactionsByFilterAndDateRange(Long userId, String startDate,
+			String endDate, Type type);
 
-	List<FinancialTransactionDto> getFinancialTransactionsByMonth(Long userId, YearMonth selectMonth);
+	List<FinancialTransactionDto> getFinancialTransactionsByMonth(Long userId, 	String selectedMonth);
 }

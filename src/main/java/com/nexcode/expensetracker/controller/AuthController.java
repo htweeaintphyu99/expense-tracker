@@ -95,7 +95,7 @@ public class AuthController {
 		return new ApiResponse(true, "OTP is sent successfully");
 	}
 
-	@PostMapping("/forgot-password/reset-passpword")
+	@PostMapping("/forgot-password/reset")
 	public ApiResponse forgotPassword(@Valid @RequestBody ResetPasswordRequest request) {
 
 		authService.forgotPassword(request.getEmail(), request.getPassword());

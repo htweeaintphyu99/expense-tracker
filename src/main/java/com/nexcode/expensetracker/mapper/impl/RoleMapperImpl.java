@@ -1,10 +1,11 @@
-package com.nexcode.expensetracker.mapper;
+package com.nexcode.expensetracker.mapper.impl;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.nexcode.expensetracker.mapper.RoleMapper;
 import com.nexcode.expensetracker.model.dto.RoleDto;
 import com.nexcode.expensetracker.model.entity.Role;
 

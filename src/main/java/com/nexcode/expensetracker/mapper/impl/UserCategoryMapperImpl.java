@@ -1,10 +1,11 @@
-package com.nexcode.expensetracker.mapper;
+package com.nexcode.expensetracker.mapper.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.nexcode.expensetracker.mapper.UserCategoryMapper;
 import com.nexcode.expensetracker.model.dto.UserCategoryDto;
 import com.nexcode.expensetracker.model.entity.UserCategory;
 import com.nexcode.expensetracker.model.response.UserCategoryResponse;

@@ -36,30 +36,22 @@ public class IconController {
 	@PostMapping
 	public ResponseEntity<Object> createIcon(@Valid @RequestBody IconRequest iconRequest) {
 
-		try {
-			IconDto createdIcon = iconService.createIcon(iconMapper.mapToDto(iconRequest));
-			if (createdIcon != null) {
-				return new ResponseEntity<>(new ApiResponse(true, "Icon creation successfull"), HttpStatus.CREATED);
-			}
-			throw new BadRequestException("An error occurred in icon creation!");
-		} catch (Exception e) {
-			return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), HttpStatus.BAD_REQUEST);
+		IconDto createdIcon = iconService.createIcon(iconMapper.mapToDto(iconRequest));
+		if (createdIcon != null) {
+			return new ResponseEntity<>(new ApiResponse(true, "Icon creation successful"), HttpStatus.CREATED);
 		}
-
+		throw new BadRequestException("An error occurred in icon creation!");
 	}
 
 	@PutMapping("/{iconId}")
 	public ResponseEntity<Object> updateIcon(@Valid @RequestBody IconRequest iconRequest, @PathVariable Long iconId) {
 
-		try {
-			IconDto updatedIcon = iconService.updateIcon(iconMapper.mapToDto(iconRequest), iconId);
-			if (updatedIcon != null) {
-				return new ResponseEntity<>(new ApiResponse(true, "Icon update successful"), HttpStatus.OK);
-			}
-			throw new BadRequestException("An error occurred in icon updation!");
-		} catch (Exception e) {
-			return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), HttpStatus.BAD_REQUEST);
+		IconDto updatedIcon = iconService.updateIcon(iconMapper.mapToDto(iconRequest), iconId);
+		if (updatedIcon != null) {
+			return new ResponseEntity<>(new ApiResponse(true, "Icon updation successful"), HttpStatus.OK);
 		}
+		throw new BadRequestException("An error occurred in icon updation!");
+
 	}
 
 	@GetMapping
@@ -74,12 +66,9 @@ public class IconController {
 	@DeleteMapping("/{iconId}")
 	public ResponseEntity<Object> deleteIconById(@PathVariable Long iconId) {
 
-		try {
-			iconService.deleteIconById(iconId);
-			return new ResponseEntity<>(new ApiResponse(true, "Icon deletion successful"), HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), HttpStatus.BAD_REQUEST);
-		}
+		iconService.deleteIconById(iconId);
+		return new ResponseEntity<>(new ApiResponse(true, "Icon deletion successful"), HttpStatus.NO_CONTENT);
+
 	}
 
 	@GetMapping("/except-default")

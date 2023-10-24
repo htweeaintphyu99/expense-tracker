@@ -133,6 +133,8 @@ public class AuthServiceImpl implements AuthService {
 		
 		String emailReceiver = otpRequest.getEmail();
 		
+		
+		//resend OTP for changing new email 
 		if(otpRequest.getNewEmail() != null) {
 		
 			emailReceiver = otpRequest.getNewEmail();

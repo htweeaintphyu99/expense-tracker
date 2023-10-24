@@ -1,7 +1,8 @@
-package com.nexcode.expensetracker.mapper;
+package com.nexcode.expensetracker.mapper.impl;
 
 import org.springframework.stereotype.Component;
 
+import com.nexcode.expensetracker.mapper.UserMapper;
 import com.nexcode.expensetracker.model.dto.UserDto;
 import com.nexcode.expensetracker.model.entity.User;
 import com.nexcode.expensetracker.model.request.RegisterRequest;

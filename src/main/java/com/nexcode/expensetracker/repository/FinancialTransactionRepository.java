@@ -19,6 +19,6 @@ public interface FinancialTransactionRepository extends JpaRepository<FinancialT
 
 	List<FinancialTransaction> findAllByUserCategory(UserCategory userCategory);
 
-	@Query("select t from FinancialTransaction t where t.user.id = :userId and t.createdDate >= :startDate and t.createdDate <= :endDate and (:type is null or t.type = :type)")
+	@Query("SELECT t FROM FinancialTransaction t WHERE t.user.id = :userId AND t.createdDate >= :startDate AND t.createdDate <= :endDate AND (:type IS NULL or t.type = :type)")
 	List<FinancialTransaction> findByUserIdAndFilterAndCreatedDateBetween(@Param("userId") Long userId, @Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate, @Param("type") Optional<Type> type);
 }

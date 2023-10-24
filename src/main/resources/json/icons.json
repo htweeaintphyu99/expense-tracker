@@ -1,105 +1,4 @@
-[
-	{
-		"name": "lunch_dining",
-		"iconBgColor": "#FF6B6B",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "add_home",
-		"iconBgColor": "#87CEEB",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "price_change",
-		"iconBgColor": "#FFD700",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "sell",
-		"iconBgColor": "#008000",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "liquor",
-		"iconBgColor": "#800080",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "shop",
-		"iconBgColor": "#008080",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "ramen_dining",
-		"iconBgColor": "#E34234",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "local_bar",
-		"iconBgColor": "#4B0082",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "point_of_sale",
-		"iconBgColor": "#FF007F",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "redeem",
-		"iconBgColor": "#FFBF00",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "sports_bar",
-		"iconBgColor": "#191970",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "atm",
-		"iconBgColor": "#708090",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "fastfood",
-		"iconBgColor": "#FF6347",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "add_shopping_cart",
-		"iconBgColor": "#2E8B57",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "shopping_bag",
-		"iconBgColor": "#4169E1",
-		"type": "EXPENSE"
-	},
-	{
-		"name": "account_balance_wallet",
-		"iconBgColor": "#808000",
-		"type": "INCOME"
-	},
-	{
-		"name": "currency_bitcoin",
-		"iconBgColor": "#F7931A",
-		"type": "INCOME"
-	},
-	{
-		"name": "local_convenience_store",
-		"iconBgColor": "#967BB6",
-		"type": "INCOME"
-	},
-	{
-		"name": "savings",
-		"iconBgColor": "#228B22",
-		"type": "INCOME"
-	},
-	{
-		"name": "account_balance",
-		"iconBgColor": "#40E0D0",
-		"type": "INCOME"
-	},
-	{
+[   {
 		"name": "restaurant",
 		"iconBgColor": "#612500",
 		"type": "EXPENSE"
@@ -152,6 +51,101 @@
 	{
 		"name": "payments",
 		"iconBgColor": "#FA16C8",
+		"type": "INCOME"
+	},
+	{
+		"name": "add_shopping_card",
+		"iconBgColor": "#FA541C",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "atm",
+		"iconBgColor": "#F43F5E",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "shop",
+		"iconBgColor": "#FFEC3D",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "point_of_sale",
+		"iconBgColor": "#092B00",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "add_home",
+		"iconBgColor": "#002766",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "price_change",
+		"iconBgColor": "#820014",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "local_bar",
+		"iconBgColor": "#00474F",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "sell",
+		"iconBgColor": "#08979C",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "shopping_bag",
+		"iconBgColor": "#10B981",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "ramen_dining",
+		"iconBgColor": "#DC2626",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "sports_bar",
+		"iconBgColor": "#D48806",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "lunch_dining",
+		"iconBgColor": "#722ED1",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "redeem",
+		"iconBgColor": "#0369A1",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "fastfood",
+		"iconBgColor": "#F759AB",
+		"type": "EXPENSE"
+	},
+	{
+		"name": "local_convenience_store",
+		"iconBgColor": "#9E1068",
+		"type": "INCOME"
+	},
+	{
+		"name": "account_balance",
+		"iconBgColor": "#EAB308",
+		"type": "INCOME"
+	},
+	{
+		"name": "savings",
+		"iconBgColor": "#D46B08",
+		"type": "INCOME"
+	},
+	{
+		"name": "account_balance_wallet",
+		"iconBgColor": "#FF4D4F",
+		"type": "INCOME"
+	},
+	{
+		"name": "currency_bitcoin",
+		"iconBgColor": "#059669",
 		"type": "INCOME"
 	}
 ]

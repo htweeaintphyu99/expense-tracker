@@ -2,12 +2,13 @@ package com.nexcode.expensetracker.controller;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,9 +41,11 @@ public class FinancialTransactionController {
 	private final FinancialTransactionMapper transactionMapper;
 
 	@PostMapping
-	public ApiResponse createFinancialTransaction(@RequestBody FinancialTransactionRequest transactionRequest, @CurrentUser UserPrincipal currentUser) {
+	public ApiResponse createFinancialTransaction(@RequestBody FinancialTransactionRequest transactionRequest,
+			@CurrentUser UserPrincipal currentUser) {
 
-		FinancialTransactionDto createdtransaction = transactionService.createFinancialTransaction(currentUser.getId() ,transactionRequest);
+		FinancialTransactionDto createdtransaction = transactionService.createFinancialTransaction(currentUser.getId(),
+				transactionRequest);
 		if (createdtransaction != null) {
 			return new ApiResponse(true, "Transaction creation successful");
 		}
@@ -51,16 +54,17 @@ public class FinancialTransactionController {
 	}
 
 	@PutMapping("/{id}")
-	public ApiResponse updateFinancialTransaction(@PathVariable Long id, @CurrentUser UserPrincipal currentUser, @Valid @RequestBody FinancialTransactionRequest transactionRequest) {
+	public ApiResponse updateFinancialTransaction(@PathVariable Long id, @CurrentUser UserPrincipal currentUser,
+			@Valid @RequestBody FinancialTransactionRequest transactionRequest) {
 
-		FinancialTransactionDto updatedtransaction = transactionService.updateFinancialTransaction(id, currentUser.getId() , transactionRequest);
+		FinancialTransactionDto updatedtransaction = transactionService.updateFinancialTransaction(id,
+				currentUser.getId(), transactionRequest);
 		if (updatedtransaction != null) {
 			return new ApiResponse(true, "Transaction updation successful");
 		}
 		throw new BadRequestException("An error occurred in transaction updation!");
 
 	}
-
 
 	@DeleteMapping("/{id}")
 	public ApiResponse deleteFinancialTransactionById(@PathVariable Long id, @CurrentUser UserPrincipal currentUser) {
@@ -69,43 +73,40 @@ public class FinancialTransactionController {
 		return new ApiResponse(true, "Transaction deletion successful");
 
 	}
-	
-	
+
 	@GetMapping
 	public List<FinancialTransactionResponse> getTransactions(@CurrentUser UserPrincipal currentUser,
-			@RequestParam(name = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
-			@RequestParam(name = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
-			@RequestParam(name = "selectMonth", required = false) YearMonth selectMonth,
+			@RequestParam(name = "startDate", required = false) String startDate,
+			@RequestParam(name = "endDate", required = false) String endDate,
+			@RequestParam(name = "selectedMonth", required = false) String selectedMonth,
 			@RequestParam(name = "filter", required = false) String filter) {
 
-		List<FinancialTransactionDto> transactionDtos = new ArrayList<>();
-
-		if (startDate != null && endDate != null) {
-
-			if (filter.equals("EXPENSE")) {
-				transactionDtos = transactionService.getFinancialTransactionsByFilterAndDateRange(
-						currentUser.getId(), startDate, endDate, Type.EXPENSE);
+		
+		List<FinancialTransactionDto> transactionDtos = null;
+		
+	    if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) { 
+	        if (filter.equals("EXPENSE")) {
+				transactionDtos = transactionService.getFinancialTransactionsByFilterAndDateRange(currentUser.getId(),
+						startDate, endDate, Type.EXPENSE);
 
 			} else if (filter.equals("INCOME")) {
 
-				transactionDtos = transactionService.getFinancialTransactionsByFilterAndDateRange(
-						currentUser.getId(), startDate, endDate, Type.INCOME);
+				transactionDtos = transactionService.getFinancialTransactionsByFilterAndDateRange(currentUser.getId(),
+						startDate, endDate, Type.INCOME);
 
 			} else if (filter.equals("ALL")) {
 
-				transactionDtos = transactionService.getFinancialTransactionsByFilterAndDateRange(
-						currentUser.getId(), startDate, endDate, null);
+				transactionDtos = transactionService.getFinancialTransactionsByFilterAndDateRange(currentUser.getId(),
+						startDate, endDate, null);
 
 			}
-
-		} else if (selectMonth != null) {
-
-			// Only transactions with expense will be returned
-			transactionDtos = transactionService.getFinancialTransactionsByMonth(currentUser.getId(),
-					selectMonth);
-		}
-		return transactionMapper.mapToRepsonse(transactionDtos);
-
+	    }
+	    
+	    // Parse 'selectMonthStr' to YearMonth
+	    if (selectedMonth != null && !selectedMonth.isEmpty()) {
+			transactionDtos = transactionService.getFinancialTransactionsByMonth(currentUser.getId(), selectedMonth);
+	    }
+		return transactionMapper.mapToRepsonse(transactionDtos);		
 	}
 
 }
