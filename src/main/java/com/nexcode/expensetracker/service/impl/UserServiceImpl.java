@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean changePassword(ChangePasswordRequest request, String email) {
-
+		
 		User user = userRepository.findByEmail(email)
 				.orElseThrow(() -> new BadRequestException("User Not Found with email : " + email));
 

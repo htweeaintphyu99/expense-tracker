@@ -34,9 +34,6 @@ public class UserCategoryController {
 	private final UserCategoryService userCategoryService;
 	private final UserCategoryMapper userCategoryMapper;
 	
-	
-	private final UserRepository userRepository;
-
 	@PostMapping
 	public ApiResponse createUserCategory(@CurrentUser UserPrincipal currentUser,
 			@Valid @RequestBody UserCategoryRequest userCategoryRequest) {

@@ -1,14 +1,10 @@
 package com.nexcode.expensetracker.controller;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.transaction.TransactionDefinition;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +37,7 @@ public class FinancialTransactionController {
 	private final FinancialTransactionMapper transactionMapper;
 
 	@PostMapping
-	public ApiResponse createFinancialTransaction(@RequestBody FinancialTransactionRequest transactionRequest,
+	public ApiResponse createFinancialTransaction(@Valid @RequestBody FinancialTransactionRequest transactionRequest,
 			@CurrentUser UserPrincipal currentUser) {
 
 		FinancialTransactionDto createdtransaction = transactionService.createFinancialTransaction(currentUser.getId(),
@@ -54,7 +50,7 @@ public class FinancialTransactionController {
 	}
 
 	@PutMapping("/{id}")
-	public ApiResponse updateFinancialTransaction(@PathVariable Long id, @CurrentUser UserPrincipal currentUser,
+	public ApiResponse updateFinancialTransaction(@Valid @PathVariable Long id, @CurrentUser UserPrincipal currentUser,
 			@Valid @RequestBody FinancialTransactionRequest transactionRequest) {
 
 		FinancialTransactionDto updatedtransaction = transactionService.updateFinancialTransaction(id,

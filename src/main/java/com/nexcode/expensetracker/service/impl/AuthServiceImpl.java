@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import com.nexcode.expensetracker.model.entity.Role;
 import com.nexcode.expensetracker.model.entity.RoleName;
 import com.nexcode.expensetracker.model.entity.User;
 import com.nexcode.expensetracker.model.entity.UserCategory;
+import com.nexcode.expensetracker.model.exception.BadRequestException;
 import com.nexcode.expensetracker.model.exception.ConflictException;
 import com.nexcode.expensetracker.model.exception.InternalServerErrorException;
 import com.nexcode.expensetracker.model.exception.NotFoundException;
@@ -44,6 +46,10 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public String register(UserDto userDto) {
 
+		if (!userDto.getEmail().chars().noneMatch(Character::isUpperCase)) {
+			throw new BadRequestException("Email must be in lowercase!");
+		}
+
 		User existingUser = userRepository.findByEmail(userDto.getEmail()).orElse(null);
 
 		if (existingUser != null && existingUser.isVerified()) {
@@ -56,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
 		Set<Role> roles = Stream.of(role).collect(Collectors.toSet());
 
 		String otp = OtpGenerator.generateOtp();
-		
+
 		if (existingUser != null) {
 			existingUser.setUsername(userDto.getUsername());
 			existingUser.setPassword(encodedPassword);
@@ -66,8 +72,7 @@ public class AuthServiceImpl implements AuthService {
 			userRepository.save(existingUser);
 
 			try {
-				emailSender.send(existingUser.getEmail(),
-						EmailSender.buildEmailForm(existingUser.getUsername(), otp));
+				emailSender.send(existingUser.getEmail(), EmailSender.buildEmailForm(existingUser.getUsername(), otp));
 			} catch (Exception e) {
 				throw new InternalServerErrorException("Error occured in email sending!");
 			}
@@ -93,12 +98,17 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public boolean verifyOtp(OtpRequest request) {
 
+		if (!request.getEmail().chars().noneMatch(Character::isUpperCase)) {
+			throw new BadRequestException("Email must be in lowercase!");
+		}
+
 		User user = userRepository.findByEmail(request.getEmail())
 				.orElseThrow(() -> new NotFoundException("User not found with email : " + request.getEmail()));
 
 		Instant currentTime = Instant.now();
-		
-		if (user != null && request.getOtp().equals(user.getOtp()) && user.getOtpExpirationTime().isAfter(currentTime)) {
+
+		if (user != null && request.getOtp().equals(user.getOtp())
+				&& user.getOtpExpirationTime().isAfter(currentTime)) {
 
 			user.setOtp(null);
 			user.setOtpExpirationTime(null);
@@ -122,7 +132,11 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public String resendOtp(OtpRequest otpRequest) {
- 
+
+		if (!otpRequest.getEmail().chars().noneMatch(Character::isUpperCase)) {
+			throw new BadRequestException("Email must be in lowercase!");
+		}
+
 		User user = userRepository.findByEmail(otpRequest.getEmail())
 				.orElseThrow(() -> new NotFoundException("User not found  with email : " + otpRequest.getEmail()));
 
@@ -130,19 +144,17 @@ public class AuthServiceImpl implements AuthService {
 		user.setOtp(otp);
 		user.setOtpExpirationTime(OtpGenerator.getOtpExpiredTime());
 		userRepository.save(user);
-		
+
 		String emailReceiver = otpRequest.getEmail();
-		
-		
-		//resend OTP for changing new email 
-		if(otpRequest.getNewEmail() != null) {
-		
+
+		// resend OTP for changing new email
+		if (otpRequest.getNewEmail() != null && otpRequest.getNewEmail().chars().noneMatch(Character::isUpperCase)) {
+
 			emailReceiver = otpRequest.getNewEmail();
 		}
-		
+
 		try {
-			emailSender.send(emailReceiver,
-					EmailSender.buildEmailForm(user.getUsername(), otp));
+			emailSender.send(emailReceiver, EmailSender.buildEmailForm(user.getUsername(), otp));
 		} catch (Exception e) {
 			throw new InternalServerErrorException("Error occured in email sending!");
 		}
@@ -165,9 +177,12 @@ public class AuthServiceImpl implements AuthService {
 		userCategoryRepository.saveAll(userCategories);
 	}
 
-	
 	@Override
 	public boolean forgotPassword(String email, String password) {
+
+		if (email.chars().noneMatch(Character::isUpperCase)) {
+			throw new BadRequestException("Email must be in lowercase!");
+		}
 
 		User user = userRepository.findByEmail(email)
 				.orElseThrow(() -> new NotFoundException("User not found with email : " + email));

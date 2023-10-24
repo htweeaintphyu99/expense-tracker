@@ -1,6 +1,8 @@
 package com.nexcode.expensetracker.model.request;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import com.nexcode.expensetracker.model.entity.Type;
 
@@ -11,17 +13,18 @@ import lombok.Setter;
 @Getter
 public class FinancialTransactionRequest {
 	
-	@NotBlank 
+	@NotNull
 	private Long userCategoryId;
 	
 	@NotBlank
 	private String createdDate;
 	
-	@NotBlank
+	@NotNull
+	@Positive
 	private int amount;
 	
 	private String description;
 	
-	@NotBlank
+	@NotNull
 	private Type type;
 }

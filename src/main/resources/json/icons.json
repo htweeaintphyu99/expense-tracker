@@ -54,7 +54,7 @@
 		"type": "INCOME"
 	},
 	{
-		"name": "add_shopping_card",
+		"name": "add_shopping_cart",
 		"iconBgColor": "#FA541C",
 		"type": "EXPENSE"
 	},
