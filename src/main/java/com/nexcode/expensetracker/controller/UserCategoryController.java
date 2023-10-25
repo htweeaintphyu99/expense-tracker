@@ -19,7 +19,6 @@ import com.nexcode.expensetracker.model.exception.BadRequestException;
 import com.nexcode.expensetracker.model.request.UserCategoryRequest;
 import com.nexcode.expensetracker.model.response.ApiResponse;
 import com.nexcode.expensetracker.model.response.UserCategoryResponse;
-import com.nexcode.expensetracker.repository.UserRepository;
 import com.nexcode.expensetracker.security.CurrentUser;
 import com.nexcode.expensetracker.security.UserPrincipal;
 import com.nexcode.expensetracker.service.UserCategoryService;

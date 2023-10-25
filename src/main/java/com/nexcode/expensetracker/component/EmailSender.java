@@ -1,4 +1,4 @@
-package com.nexcode.expensetracker.emailsender;
+package com.nexcode.expensetracker.component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Component
 public class EmailSender{
-
 
 	private final JavaMailSender mailSender;
 

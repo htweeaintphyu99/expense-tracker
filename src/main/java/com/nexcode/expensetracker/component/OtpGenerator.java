@@ -1,4 +1,4 @@
-package com.nexcode.expensetracker.otpgenerator;
+package com.nexcode.expensetracker.component;
 
 import java.time.Duration;
 import java.time.Instant;

@@ -36,7 +36,7 @@ public class User {
 	@Column(name = "username")
 	private String username;
 
-	@Column(name = "email", unique = true)
+	@Column(name = "email", unique = true, columnDefinition = "VARCHAR(255) COLLATE utf8_bin")
 	private String email;
 
 	@JsonIgnore

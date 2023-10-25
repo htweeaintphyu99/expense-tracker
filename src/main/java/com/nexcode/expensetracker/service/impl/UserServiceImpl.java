@@ -1,10 +1,14 @@
 package com.nexcode.expensetracker.service.impl;
 
+import java.util.List;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nexcode.expensetracker.emailsender.EmailSender;
+import com.nexcode.expensetracker.component.EmailSender;
+import com.nexcode.expensetracker.component.OtpGenerator;
 import com.nexcode.expensetracker.mapper.UserMapper;
 import com.nexcode.expensetracker.model.dto.UserDto;
 import com.nexcode.expensetracker.model.entity.User;
@@ -14,7 +18,6 @@ import com.nexcode.expensetracker.model.exception.IncorrectCredentialsException;
 import com.nexcode.expensetracker.model.exception.InternalServerErrorException;
 import com.nexcode.expensetracker.model.exception.NotFoundException;
 import com.nexcode.expensetracker.model.request.ChangePasswordRequest;
-import com.nexcode.expensetracker.otpgenerator.OtpGenerator;
 import com.nexcode.expensetracker.repository.UserRepository;
 import com.nexcode.expensetracker.service.UserService;
 
@@ -51,7 +54,7 @@ public class UserServiceImpl implements UserService {
 	public boolean changePassword(ChangePasswordRequest request, String email) {
 		
 		User user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new BadRequestException("User Not Found with email : " + email));
+				.orElseThrow(() -> new NotFoundException("User Not Found with email : " + email));
 
 		if (passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
 
@@ -67,7 +70,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto getCurrentUser(String email) {
 
 		User user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new BadRequestException("User not found  with email : " + email));
+				.orElseThrow(() -> new NotFoundException("User not found  with email : " + email));
 		return userMapper.mapToDto(user);
 	}
 
@@ -75,7 +78,7 @@ public class UserServiceImpl implements UserService {
 	public String changeName(String username, String email) {
 
 		User user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new BadRequestException("User not found  with email : " + email));
+				.orElseThrow(() -> new NotFoundException("User not found  with email : " + email));
 		user.setUsername(username);
 		User savedUser = userRepository.save(user);
 
@@ -109,4 +112,17 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public void deleteUserAcc(String email) {
+		
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User Not Found with email : " + email));
+		userRepository.delete(user);
+	}
+
+	@Scheduled(cron = "0 0 0 * * ?") // Run at 12:00 AM(Midnight) every day
+	public void deleteNotVerifiedUsers() {
+		
+	    List<User> users = userRepository.findAllByNotVerified();
+	    userRepository.deleteAll(users);
+	}
 }

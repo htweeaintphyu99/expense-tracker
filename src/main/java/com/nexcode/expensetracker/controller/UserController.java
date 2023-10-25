@@ -2,8 +2,8 @@ package com.nexcode.expensetracker.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,6 +85,13 @@ public class UserController {
 
 		return new ApiResponse(true, "Otp is sent to change email successfully");
 
+	}
+	
+	@DeleteMapping
+	public ApiResponse deleteUserAcc(@CurrentUser UserPrincipal currentUser) {
+		
+		userService.deleteUserAcc(currentUser.getEmail());
+		return new ApiResponse(true, "User account is deleted successfully");
 	}
 
 }

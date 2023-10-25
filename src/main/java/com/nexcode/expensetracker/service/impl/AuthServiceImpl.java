@@ -6,12 +6,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nexcode.expensetracker.emailsender.EmailSender;
+import com.nexcode.expensetracker.component.EmailSender;
+import com.nexcode.expensetracker.component.OtpGenerator;
 import com.nexcode.expensetracker.model.dto.UserDto;
 import com.nexcode.expensetracker.model.entity.Role;
 import com.nexcode.expensetracker.model.entity.RoleName;
@@ -22,7 +22,6 @@ import com.nexcode.expensetracker.model.exception.ConflictException;
 import com.nexcode.expensetracker.model.exception.InternalServerErrorException;
 import com.nexcode.expensetracker.model.exception.NotFoundException;
 import com.nexcode.expensetracker.model.request.OtpRequest;
-import com.nexcode.expensetracker.otpgenerator.OtpGenerator;
 import com.nexcode.expensetracker.repository.CategoryRepository;
 import com.nexcode.expensetracker.repository.UserCategoryRepository;
 import com.nexcode.expensetracker.repository.UserRepository;
@@ -180,7 +179,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public boolean forgotPassword(String email, String password) {
 
-		if (email.chars().noneMatch(Character::isUpperCase)) {
+		if (!email.chars().noneMatch(Character::isUpperCase)) {
 			throw new BadRequestException("Email must be in lowercase!");
 		}
 
