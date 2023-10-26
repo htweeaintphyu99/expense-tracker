@@ -67,8 +67,9 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 
 		User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User doesn't exist!"));
 
-		if (userCategoryRepository.findByNameIgnoreCaseAndUser(userCategoryRequest.getUserCategoryName(), user)
-				.isPresent()) {
+		UserCategory currentCategory = userCategoryRepository
+				.findByNameIgnoreCaseAndUser(userCategoryRequest.getUserCategoryName(), user).orElse(null);
+		if (currentCategory.getId() != id) {
 			throw new BadRequestException("User category name already exists!");
 		}
 
