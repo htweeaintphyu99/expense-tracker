@@ -9,7 +9,7 @@ public interface UserCategoryService {
 	
 	UserCategoryDto createUserCategory(Long userId, UserCategoryRequest userCategoryRequest);
 
-	UserCategoryDto updateUserCategory(Long id, UserCategoryRequest userCategoryRequest);
+	UserCategoryDto updateUserCategory(Long id, UserCategoryRequest userCategoryRequest, Long userId);
 	
 	List<UserCategoryDto> getAllUserCategories();
 

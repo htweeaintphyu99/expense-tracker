@@ -44,7 +44,7 @@ public class MyApplicationRunner implements CommandLineRunner {
 
 		addCategories();
 
-		Optional<UserCategory> optionalCategory = userCategoryRepository.findByUserCategoryNameIgnoreCase("Others");
+		Optional<UserCategory> optionalCategory = userCategoryRepository.findByNameIgnoreCaseAndUser("Others", null);
 		if (optionalCategory.isEmpty()) {
 			UserCategory systemCategory = new UserCategory();
 			systemCategory.setName("Others");

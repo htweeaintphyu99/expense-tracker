@@ -48,9 +48,9 @@ public class UserCategoryController {
 
 	@PutMapping("/{id}")
 	public ApiResponse updateUserCategory(@Valid @RequestBody UserCategoryRequest userCategoryRequest,
-			@PathVariable Long id) {
+			@PathVariable Long id, @CurrentUser UserPrincipal currentUser) {
 
-		UserCategoryDto updateduserCategory = userCategoryService.updateUserCategory(id, userCategoryRequest);
+		UserCategoryDto updateduserCategory = userCategoryService.updateUserCategory(id, userCategoryRequest, currentUser.getId());
 		if (updateduserCategory != null) {
 			return new ApiResponse(true, "User category updation successful");
 		}

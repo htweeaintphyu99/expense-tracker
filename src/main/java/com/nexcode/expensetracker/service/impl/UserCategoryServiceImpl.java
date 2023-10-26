@@ -37,18 +37,17 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 	@Override
 	public UserCategoryDto createUserCategory(Long userId, UserCategoryRequest userCategoryRequest) {
 
-		if (userCategoryRepository.findByUserCategoryNameIgnoreCase(userCategoryRequest.getUserCategoryName())
+		User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User doesn't exist!"));
+
+		if (userCategoryRepository.findByNameIgnoreCaseAndUser(userCategoryRequest.getUserCategoryName(), user)
 				.isPresent()) {
 			throw new BadRequestException("User category name already exists!");
 		}
 
 		UserCategory userCategory = new UserCategory();
 
-		User user = userRepository.findById(userId)
-				.orElseThrow(() -> new BadRequestException("User doesn't exist!"));
-
-		Icon icon = iconRepository.findByName(userCategoryRequest.getIconName())
-				.orElseThrow(() -> new NotFoundException("Icon : " + userCategoryRequest.getIconName() + " is not found!"));
+		Icon icon = iconRepository.findByName(userCategoryRequest.getIconName()).orElseThrow(
+				() -> new NotFoundException("Icon : " + userCategoryRequest.getIconName() + " is not found!"));
 
 		userCategory.setName(userCategoryRequest.getUserCategoryName());
 		userCategory.setType(userCategoryRequest.getType());
@@ -64,7 +63,14 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 	}
 
 	@Override
-	public UserCategoryDto updateUserCategory(Long id, UserCategoryRequest userCategoryRequest) {
+	public UserCategoryDto updateUserCategory(Long id, UserCategoryRequest userCategoryRequest, Long userId) {
+
+		User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User doesn't exist!"));
+
+		if (userCategoryRepository.findByNameIgnoreCaseAndUser(userCategoryRequest.getUserCategoryName(), user)
+				.isPresent()) {
+			throw new BadRequestException("User category name already exists!");
+		}
 
 		UserCategory userCategory = userCategoryRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException("User category with id " + id + " is not found!"));
@@ -73,8 +79,8 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 			throw new BadRequestException("System Category can't be modified!");
 		}
 
-		Icon icon = iconRepository.findByName(userCategoryRequest.getIconName())
-				.orElseThrow(() -> new NotFoundException("Icon : " + userCategoryRequest.getIconName() + " is not found!"));
+		Icon icon = iconRepository.findByName(userCategoryRequest.getIconName()).orElseThrow(
+				() -> new NotFoundException("Icon : " + userCategoryRequest.getIconName() + " is not found!"));
 
 		userCategory.setName(userCategoryRequest.getUserCategoryName());
 		userCategory.setType(userCategoryRequest.getType());
@@ -107,10 +113,10 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 		}
 
 		List<FinancialTransaction> transactions = transactionRepository.findAllByUserCategory(userCategory);
-		
-		UserCategory defaultCategory = userCategoryRepository.findByUserCategoryNameIgnoreCase("Others")
+
+		UserCategory defaultCategory = userCategoryRepository.findByNameIgnoreCaseAndUser("Others", null)
 				.orElseThrow(() -> new BadRequestException("An error occurred in user category deletion!"));
-		
+
 		transactions = transactions.stream().map(t -> {
 			t.setUserCategory(defaultCategory);
 			return t;
