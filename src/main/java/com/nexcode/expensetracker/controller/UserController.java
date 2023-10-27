@@ -55,7 +55,7 @@ public class UserController {
 			@CurrentUser UserPrincipal currentUser) {
 
 		userService.updateBudgetByUserId(currentUser.getId(), budgetRequest.getBudget());
-		return new ApiResponse(true, "Updated budget successfully.");
+		return new ApiResponse(true, "Budget updated successfully.");
 
 	}
 
@@ -64,7 +64,7 @@ public class UserController {
 			@CurrentUser UserPrincipal currentUser) {
 
 		userService.changePassword(request, currentUser.getEmail());
-	    return new ApiResponse(true, "Changed password successfully.");
+	    return new ApiResponse(true, "Password changed successfully.");
 	}
 
 	@PutMapping("/change-username")
@@ -72,7 +72,7 @@ public class UserController {
 
 		String name = userService.changeName(request.getUsername(), currentUser.getEmail());
 		if (name != null) {
-			return new ApiResponse(true, "Changed username successfully");
+			return new ApiResponse(true, "Username changed successfully");
 		}
 		throw new BadRequestException("Error encountered in changing username!");
 	}
@@ -83,7 +83,7 @@ public class UserController {
 
 		userService.changeEmail(currentUser.getEmail(), request.getNewEmail(), request.getPassword());
 
-		return new ApiResponse(true, "The OTP code has been sent to your email to change email.");
+		return new ApiResponse(true, "The OTP code has been sent to your new email.");
 
 	}
 	
@@ -91,7 +91,7 @@ public class UserController {
 	public ApiResponse deleteUserAcc(@CurrentUser UserPrincipal currentUser) {
 		
 		userService.deleteUserAcc(currentUser.getEmail());
-		return new ApiResponse(true, "Deleted user account successfully.");
+		return new ApiResponse(true, "User account deleted successfully.");
 	}
 
 }

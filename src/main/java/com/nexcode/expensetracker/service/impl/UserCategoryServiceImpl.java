@@ -75,9 +75,9 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 
 		UserCategory userCategory = userCategoryRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException("User category with id " + id + " is not found!"));
-
+		
 		if (userCategory.getType() == null) {
-			throw new BadRequestException("System Category can't be modified!");
+			throw new BadRequestException("System category can't be modified!");
 		}
 
 		Icon icon = iconRepository.findByName(userCategoryRequest.getIconName()).orElseThrow(
@@ -110,7 +110,7 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 				.orElseThrow(() -> new NotFoundException("User category with id " + userCategoryId + " is not found!"));
 
 		if (userCategory.getType() == null) {
-			throw new BadRequestException("System Category can't be deleted!");
+			throw new BadRequestException("System category can't be deleted!");
 		}
 
 		List<FinancialTransaction> transactions = transactionRepository.findAllByUserCategory(userCategory);

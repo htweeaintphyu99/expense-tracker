@@ -54,16 +54,18 @@ public class UserServiceImpl implements UserService {
 	public boolean changePassword(ChangePasswordRequest request, String email) {
 		
 		User user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new NotFoundException("User Not Found with email : " + email));
+				.orElseThrow(() -> new NotFoundException("User not found with email : " + email));
 
 		if (passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
-
+			if (request.getOldPassword().equals(request.getNewPassword())) {
+				throw new BadRequestException("Your new password cannot be the same as your old password!");
+			}
 			user.setPassword(passwordEncoder.encode(request.getNewPassword()));
 			userRepository.save(user);
 			return true;
 		}
 
-		throw new IncorrectCredentialsException("Password incorrect!");
+		throw new IncorrectCredentialsException("Password is incorrect. Try again!");
 	}
 
 	@Override
@@ -90,7 +92,7 @@ public class UserServiceImpl implements UserService {
 	public boolean changeEmail(String email, String newEmail, String password) {
 
 		User user = userRepository.findByEmail(email)
-				.orElseThrow(() -> new NotFoundException("User Not Found with email : " + email));
+				.orElseThrow(() -> new NotFoundException("User not found with email : " + email));
 
 		if (!passwordEncoder.matches(password, user.getPassword())) {
 			throw new BadRequestException("Password is incorrect. Try again!");
@@ -115,7 +117,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUserAcc(String email) {
 		
-		User user = userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User Not Found with email : " + email));
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found with email : " + email));
 		userRepository.delete(user);
 	}
 

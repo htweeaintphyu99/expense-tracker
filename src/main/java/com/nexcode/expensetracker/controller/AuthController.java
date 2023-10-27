@@ -103,7 +103,7 @@ public class AuthController {
 	public ApiResponse forgotPassword(@Valid @RequestBody ResetPasswordRequest request) {
 
 		authService.forgotPassword(request.getEmail(), request.getPassword());
-		return new ApiResponse(true, "Reset password successfully.");
+		return new ApiResponse(true, "Password reset successfully.");
 	}
 
 }
