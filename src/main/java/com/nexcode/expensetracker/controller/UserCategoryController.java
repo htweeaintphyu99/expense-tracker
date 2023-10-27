@@ -40,7 +40,7 @@ public class UserCategoryController {
 		UserCategoryDto createduserCategory = userCategoryService.createUserCategory(currentUser.getId(),
 				userCategoryRequest);
 		if (createduserCategory != null) {
-			return new ApiResponse(true, "User category creation successful");
+			return new ApiResponse(true, "Created user category successfully.");
 		}
 		throw new BadRequestException("An error occurred in user category creation!");
 
@@ -52,7 +52,7 @@ public class UserCategoryController {
 
 		UserCategoryDto updateduserCategory = userCategoryService.updateUserCategory(id, userCategoryRequest, currentUser.getId());
 		if (updateduserCategory != null) {
-			return new ApiResponse(true, "User category updation successful");
+			return new ApiResponse(true, "Updated user category successfully.");
 		}
 		throw new BadRequestException("An error occurred in user category creation!");
 
@@ -74,6 +74,6 @@ public class UserCategoryController {
 
 		userCategoryService.deleteUserCategoryById(id);
 
-		return new ApiResponse(true, "User category deletion successful");
+		return new ApiResponse(true, "Deleted user category successfully.");
 	}
 }

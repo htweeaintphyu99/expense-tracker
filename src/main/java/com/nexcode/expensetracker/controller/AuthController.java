@@ -44,9 +44,9 @@ public class AuthController {
 		UserDto userDto = userMapper.mapToDto(registerRequest);
 		String otp = authService.register(userDto);
 		if (otp != null) {
-			return new ApiResponse(true, "User registration successful");
+			return new ApiResponse(true, "The OTP code has been sent to your email.");
 		}
-		throw new BadRequestException("Error encountered in user registration!");
+		throw new BadRequestException("Error encountered in user account registration!");
 
 	}
 
@@ -55,9 +55,9 @@ public class AuthController {
 
 		boolean otpValid = authService.verifyOtp(otpRequest);
 		if (otpValid) {
-			return new ApiResponse(true, "OTP verification successful");
+			return new ApiResponse(true, "OTP verification is successful.");
 		}
-		throw new BadRequestException("OTP verification failed. Please check the OTP and try again!");
+		throw new BadRequestException("That code was invalid. Please try again!");
 	}
 
 	@PostMapping("/login")
@@ -78,7 +78,7 @@ public class AuthController {
 
 			jwtToken = jwtTokenProvider.createJwtToken(authentication);
 		} catch (Exception e) {
-			throw new IncorrectCredentialsException("Email or password incorrect!");
+			throw new IncorrectCredentialsException("Email or password is incorrect!");
 		}
 
 		return new JwtAuthenticationResponse(jwtToken, expiredAt.toInstant().toString());
@@ -89,21 +89,21 @@ public class AuthController {
 	public ApiResponse resendOtp(@Valid @RequestBody OtpRequest otpRequest) {
 
 		authService.resendOtp(otpRequest);
-		return new ApiResponse(true, "OTP is sent successfully");
+		return new ApiResponse(true, "The new OTP code has been sent to your email.");
 	}
 
 	@PostMapping("/forgot-password/send-otp")
 	public ApiResponse sendOtpInForgotPassword(@Valid @RequestBody OtpRequest otpRequest) {
 
 		authService.resendOtp(otpRequest);
-		return new ApiResponse(true, "OTP is sent successfully");
+		return new ApiResponse(true, "The OTP code has been sent to your email.");
 	}
 
 	@PostMapping("/forgot-password/reset")
 	public ApiResponse forgotPassword(@Valid @RequestBody ResetPasswordRequest request) {
 
 		authService.forgotPassword(request.getEmail(), request.getPassword());
-		return new ApiResponse(true, "Reset password successfully");
+		return new ApiResponse(true, "Reset password successfully.");
 	}
 
 }

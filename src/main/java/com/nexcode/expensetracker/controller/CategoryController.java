@@ -34,7 +34,7 @@ public class CategoryController {
 
 		CategoryDto createdcategory = categoryService.createCategory(categoryMapper.mapToDto(categoryRequest));
 		if (createdcategory != null) {
-			return new ApiResponse(true, "Category creation Successful");
+			return new ApiResponse(true, "Category created successfully");
 		}
 		throw new BadRequestException("An error occurred in creating category!");
 
@@ -46,7 +46,7 @@ public class CategoryController {
 		CategoryDto updatedcategory = categoryService.updateCategory(categoryMapper.mapToDto(categoryRequest),
 				categoryId);
 		if (updatedcategory != null) {
-			return new ApiResponse(true, "Category Update Successful");
+			return new ApiResponse(true, "Category updated successfully");
 		}
 		throw new BadRequestException("An error occurred in updating category!");
 
@@ -65,7 +65,7 @@ public class CategoryController {
 	public ApiResponse deleteCategoryById(@PathVariable Long categoryId) {
 
 		categoryService.deleteCategoryById(categoryId);
-		return new ApiResponse(true, "Category deletion successful");
+		return new ApiResponse(true, "Category deleted successfully");
 
 	}
 }
