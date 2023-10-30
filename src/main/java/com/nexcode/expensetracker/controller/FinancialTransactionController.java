@@ -42,7 +42,7 @@ public class FinancialTransactionController {
 		FinancialTransactionDto createdtransaction = transactionService.createFinancialTransaction(currentUser.getId(),
 				transactionRequest);
 		if (createdtransaction != null) {
-			return new ApiResponse(true, "Created transaction successfully.");
+			return new ApiResponse(true, "Transaction created successfully.");
 		}
 		throw new BadRequestException("An error occurred in transaction creation!");
 
@@ -55,7 +55,7 @@ public class FinancialTransactionController {
 		FinancialTransactionDto updatedtransaction = transactionService.updateFinancialTransaction(id,
 				currentUser.getId(), transactionRequest);
 		if (updatedtransaction != null) {
-			return new ApiResponse(true, "Updated transaction successfully.");
+			return new ApiResponse(true, "Transaction updated successfully.");
 		}
 		throw new BadRequestException("An error occurred in transaction updation!");
 
@@ -65,7 +65,7 @@ public class FinancialTransactionController {
 	public ApiResponse deleteFinancialTransactionById(@PathVariable Long id, @CurrentUser UserPrincipal currentUser) {
 
 		transactionService.deleteFinancialTransactionById(id, currentUser.getId());
-		return new ApiResponse(true, "Deleted transaction successfully.");
+		return new ApiResponse(true, "Transaction deleted successfully.");
 
 	}
 

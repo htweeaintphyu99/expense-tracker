@@ -38,7 +38,7 @@ public class IconController {
 
 		IconDto createdIcon = iconService.createIcon(iconMapper.mapToDto(iconRequest));
 		if (createdIcon != null) {
-			return new ResponseEntity<>(new ApiResponse(true, "Created icon successfully."), HttpStatus.CREATED);
+			return new ResponseEntity<>(new ApiResponse(true, "Icon created successfully."), HttpStatus.CREATED);
 		}
 		throw new BadRequestException("An error occurred in icon creation!");
 	}
@@ -48,7 +48,7 @@ public class IconController {
 
 		IconDto updatedIcon = iconService.updateIcon(iconMapper.mapToDto(iconRequest), iconId);
 		if (updatedIcon != null) {
-			return new ResponseEntity<>(new ApiResponse(true, "Updated icon successfully."), HttpStatus.OK);
+			return new ResponseEntity<>(new ApiResponse(true, "Icon updated successfully."), HttpStatus.OK);
 		}
 		throw new BadRequestException("An error occurred in icon updation!");
 
@@ -67,7 +67,7 @@ public class IconController {
 	public ResponseEntity<Object> deleteIconById(@PathVariable Long iconId) {
 
 		iconService.deleteIconById(iconId);
-		return new ResponseEntity<>(new ApiResponse(true, "Deleted icon successfully."), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(new ApiResponse(true, "Icon deleted successfully."), HttpStatus.NO_CONTENT);
 
 	}
 
