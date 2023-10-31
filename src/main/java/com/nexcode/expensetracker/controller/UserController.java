@@ -72,7 +72,7 @@ public class UserController {
 
 		String name = userService.changeName(request.getUsername(), currentUser.getEmail());
 		if (name != null) {
-			return new ApiResponse(true, "Username changed successfully");
+			return new ApiResponse(true, "Username changed successfully.");
 		}
 		throw new BadRequestException("Error encountered in changing username!");
 	}

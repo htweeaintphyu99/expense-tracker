@@ -49,7 +49,7 @@ public class MyApplicationRunner implements CommandLineRunner {
 			UserCategory systemCategory = new UserCategory();
 			systemCategory.setName("Others");
 			systemCategory.setIconName("help");
-			systemCategory.setIconBgColor("#00AA70");
+			systemCategory.setIconBgColor("#FF1F2B");
 			userCategoryRepository.save(systemCategory);
 
 		}

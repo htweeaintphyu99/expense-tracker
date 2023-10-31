@@ -101,6 +101,10 @@ public class UserServiceImpl implements UserService {
 		if (!userRepository.findByEmail(newEmail).isEmpty()) {
 			throw new ConflictException("Email already exists. Try again!");
 		}
+		
+		if (!newEmail.chars().noneMatch(Character::isUpperCase)) {
+			throw new BadRequestException("Email must be in lowercase!");
+		}
 
 		try {
 			String otp = OtpGenerator.generateOtp();
