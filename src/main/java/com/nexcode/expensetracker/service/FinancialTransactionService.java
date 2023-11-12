@@ -1,7 +1,5 @@
 package com.nexcode.expensetracker.service;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.List;
 
 import com.nexcode.expensetracker.model.dto.FinancialTransactionDto;

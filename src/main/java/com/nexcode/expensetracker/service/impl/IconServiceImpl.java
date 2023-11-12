@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nexcode.expensetracker.mapper.IconMapper;
 import com.nexcode.expensetracker.model.dto.IconDto;
 import com.nexcode.expensetracker.model.entity.Icon;
-import com.nexcode.expensetracker.model.exception.BadRequestException;
 import com.nexcode.expensetracker.model.exception.NotFoundException;
 import com.nexcode.expensetracker.repository.IconRepository;
 import com.nexcode.expensetracker.service.IconService;

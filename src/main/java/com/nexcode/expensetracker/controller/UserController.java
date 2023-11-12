@@ -16,6 +16,7 @@ import com.nexcode.expensetracker.model.request.BudgetRequest;
 import com.nexcode.expensetracker.model.request.ChangeEmailRequest;
 import com.nexcode.expensetracker.model.request.ChangeNameRequest;
 import com.nexcode.expensetracker.model.request.ChangePasswordRequest;
+import com.nexcode.expensetracker.model.request.DeleteAccountRequest;
 import com.nexcode.expensetracker.model.response.ApiResponse;
 import com.nexcode.expensetracker.model.response.BudgetResponse;
 import com.nexcode.expensetracker.model.response.UserResponse;
@@ -88,9 +89,9 @@ public class UserController {
 	}
 	
 	@DeleteMapping
-	public ApiResponse deleteUserAcc(@CurrentUser UserPrincipal currentUser) {
+	public ApiResponse deleteUserAcc(@Valid @RequestBody DeleteAccountRequest request, @CurrentUser UserPrincipal currentUser) {
 		
-		userService.deleteUserAcc(currentUser.getEmail());
+		userService.deleteUserAcc(request.getPassword(), currentUser.getEmail());
 		return new ApiResponse(true, "User account deleted successfully.");
 	}
 

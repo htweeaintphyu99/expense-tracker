@@ -66,6 +66,6 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	List<UserCategory> userCategories;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	List<FinancialTransaction> financialTranscations;
 }

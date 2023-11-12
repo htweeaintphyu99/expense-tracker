@@ -119,9 +119,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUserAcc(String email) {
+	public void deleteUserAcc(String password, String email) {
 		
 		User user = userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found with email : " + email));
+		if(!passwordEncoder.matches(password, user.getPassword())) {
+			throw new BadRequestException("Password is incorrect!");
+		}
 		userRepository.delete(user);
 	}
 

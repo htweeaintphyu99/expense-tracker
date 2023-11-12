@@ -17,6 +17,6 @@ public interface UserService {
 
 	boolean changeEmail(String email, String newEmail, String password);
 
-	void deleteUserAcc(String email);
+	void deleteUserAcc(String password, String email);
 	
 }

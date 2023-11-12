@@ -77,9 +77,9 @@ public class FinancialTransactionController {
 			@RequestParam(name = "filter", required = false) String filter) {
 
 		List<FinancialTransactionDto> transactionDtos = null;
-		
-	    if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) { 
-	        if (filter.equals("EXPENSE")) {
+
+		if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
+			if (filter.equals("EXPENSE")) {
 				transactionDtos = transactionService.getFinancialTransactionsByFilterAndDateRange(currentUser.getId(),
 						startDate, endDate, Type.EXPENSE);
 
@@ -94,12 +94,13 @@ public class FinancialTransactionController {
 						startDate, endDate, null);
 
 			}
-	    }
-	    
-	    if (selectedMonth != null && !selectedMonth.isEmpty()) {
+		}
+
+		if (selectedMonth != null && !selectedMonth.isEmpty()) {
 			transactionDtos = transactionService.getFinancialTransactionsByMonth(currentUser.getId(), selectedMonth);
-	    }
-		return transactionMapper.mapToRepsonse(transactionDtos);		
+		}
+		return transactionMapper.mapToRepsonse(transactionDtos);
+
 	}
 
 }
