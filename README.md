@@ -18,3 +18,14 @@ Expense Tracker is an expense management application developed during an interns
 - MySQL: Database for storing user and transaction information.
 - Spring Security: Authentication and access control.
 - Frontend: [Check repo here](https://github.com/PK-WookiDooki/antd-expense-tracker.git)
+
+## Getting Started
+- Stup Database:
+-- Create a MySQL database and configure credentials in application.properties.
+-- Run the application to automatically generate necessary tables.
+- Run the Application:
+-- Execute mvn spring-boot:run or run the application through your IDE.
+- Explore APIs:
+-- Access the APIs through the defined endpoints to interact with the application.
+
+
