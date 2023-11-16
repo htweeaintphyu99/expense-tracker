@@ -1,6 +1,6 @@
 # Expense Tracker
 
-Expense Tracker is an expense management application developed during an internship at Nexcode. Built using Spring Boot, this application simplifies expense tracking for users, ensuring efficient management of finances.
+Expense Tracker is an expense management application developed during an internship at Nexcode. Built using Spring Boot, this application simplifies expense/income tracking for users, ensuring efficient management of finances.
 
 
 ## Features
@@ -17,4 +17,4 @@ Expense Tracker is an expense management application developed during an interns
 - Spring Data JPA: Persistence layer providing easy access to data.
 - MySQL: Database for storing user and transaction information.
 - Spring Security: Authentication and access control.
-- Frontend: [https://github.com/PK-WookiDooki/antd-expense-tracker.git]
+- Frontend: [Check repo here](https://github.com/PK-WookiDooki/antd-expense-tracker.git)
