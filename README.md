@@ -20,12 +20,12 @@ Expense Tracker is an expense management application developed during an interns
 - Frontend: [Check repo here](https://github.com/PK-WookiDooki/antd-expense-tracker.git)
 
 ## Getting Started
-1. Setup Database:
+### Setup Database:
 - Create a MySQL database and configure credentials in application.properties.
 - Run the application to automatically generate necessary tables.
-2. Run the Application:
+### Run the Application:
 - Execute mvn spring-boot:run or run the application through your IDE.
-3. Explore APIs:
-   Access the APIs through the defined endpoints to interact with the application.
+### Explore APIs:
+- Access the APIs through the defined endpoints to interact with the application.
 
 
