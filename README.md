@@ -5,7 +5,7 @@ Expense Tracker is an expense management application developed during an interns
 
 ## Features
 
-User Authentication: Secure user authentication and authorization system.
-Transaction Management: Record and categorize income and expenses effortlessly.
-Category Management: Create, edit, and manage spending categories for better organization.
-Budget Tracking: Set and track budgets for different expense categories.
+- User Authentication: Secure user authentication and authorization system.
+- Transaction Management: Record and categorize income and expenses effortlessly.
+- Category Management: Create, edit, and manage categories for better organization.
+- Budget Tracking: Set and track budgets with minimum effort.
